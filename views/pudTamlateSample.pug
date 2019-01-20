@@ -1,0 +1,35 @@
+docktype html 
+html(lang="en")
+	head
+		title= title
+		script(type='text/javascript').
+	body
+		h1= title
+		
+		p This is a line with #[em some emphasis] and #[strong strong text] markup.
+		p This line has un-excaped data: !{'<em> is emphasised</em>'} and escaped data: #{'<em> is not emphasised</em>'}.
+			| This line follows on.
+		p= 'Evaluated and <em>escaped expression</em>:' + title
+
+		<!-- You can add HTML comments directly -->
+		//You can add single line JavaScript comments and the are generated to HTML commnts
+		//- Introducing a single line Java ScriptScript comment with "//-" ensures the comment isn't renderd to HTML
+		
+		p A line with link
+			a(href='/catalog/authors') Some link text
+				|  and some extra text.
+				
+		#container.colorDepth
+			if title
+				p A variable named "title" exist.
+			else
+				p A varible named "title" does not exist.
+			p.
+				pug is ters and simple template language with aLinkcolor
+				strong focus on performance and powerful features.
+				
+		h2 Generated a list
+		
+		ul
+			each val in [1, 2, 3, 4, 5]
+				li= val
