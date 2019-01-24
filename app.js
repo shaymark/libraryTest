@@ -39,6 +39,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(compression()); //Compress all routes
 app.use(helmet());
 
+// this will be enable in all views templates
+app.locals.moment = require('moment');
+
+//routing
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/catalog', catalogRouter);

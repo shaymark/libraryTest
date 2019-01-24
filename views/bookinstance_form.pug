@@ -1,6 +1,7 @@
 extends layout
 
 block content
+
 	h1=title
 	
 	form(method='POST' action='')
@@ -15,18 +16,25 @@ block content
 						
 		div.form-group
 			lable(for='imprint') Imprint:
-			input#imprint.form-control(type='text', placeholder='Publisher and date information' name='imprint' value=(undefined===bookinstance ? '' : book_list.imprint) required='true')
+			input#imprint.form-control(type='text', placeholder='Publisher and date information' name='imprint' value=(undefined===bookinstance ? '' : bookinstance.imprint))
 		div.form-group
 			lable(for='due_back') Date when book available:
-			input#due_back.form-control(type='date' name='due_back' value=(undefined===bookinstance ? '' : bookinstance.due_back) )
+			input#due_back.form-control(type='date' name='due_back' value=(undefined===bookinstance ? '' : moment(bookinstance.due_back).format("YYYY-MM-DD") ))
 		
 		div.form-group
 			lable(for='staus') Status:
-			select#status.form-control(type='select' placeholder='Select status' name='status' required='true')
-				option(value='Maintenance') Maintenance
-				option(value='Available') Available
-				option(value='Loaned') Loaned
-				option(value='Reserved') Reserved
+			if bookinstance
+				select#status.form-control(type='select' placeholder='Select status' name='status' required='true')
+					option(value='Maintenance' selected=(bookinstance.status=="Maintenance" ? 'selected' : false)) Maintenance
+					option(value='Available' selected=(bookinstance.status=="Available" ? 'selected' : false)) Available
+					option(value='Loaned' selected=(bookinstance.status=="Loaned" ? 'selected' : false)) Loaned
+					option(value='Reserved' selected=(bookinstance.status=="Reserved" ? 'selected' : false)) Reserved
+			else
+				select#status.form-control(type='select' placeholder='Select status' name='status' required='true')
+					option(value='Maintenance') Maintenance
+					option(value='Available') Available
+					option(value='Loaned') Loaned
+					option(value='Reserved') Reserved
 			
 		button.btn.btn-primary(type='submit') Submit
 		
